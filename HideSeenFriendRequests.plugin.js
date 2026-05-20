@@ -5,6 +5,18 @@
  * @description Hide seen pending friend request notifications.
  */
 
+const EYE_ICON = `
+  <svg class="icon_f8fa06" aria-hidden="true" role="img" width="24" height="24" viewBox="0 0 24 24">
+    <path fill="currentColor" d="M12 4c5.5 0 9.2 4.1 10.7 6.2a3 3 0 0 1 0 3.6C21.2 15.9 17.5 20 12 20s-9.2-4.1-10.7-6.2a3 3 0 0 1 0-3.6C2.8 8.1 6.5 4 12 4Zm0 3a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm0 2.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Z"/>
+  </svg>
+`;
+
+const EYE_OFF_ICON = `
+  <svg class="icon_f8fa06" aria-hidden="true" role="img" width="24" height="24" viewBox="0 0 24 24">
+    <path fill="currentColor" d="M2.3 2.3a1 1 0 0 1 1.4 0l18 18a1 1 0 0 1-1.4 1.4l-3.1-3.1A11.2 11.2 0 0 1 12 20c-5.5 0-9.2-4.1-10.7-6.2a3 3 0 0 1 0-3.6A18.4 18.4 0 0 1 5.1 6L2.3 3.7a1 1 0 0 1 0-1.4ZM7.3 8.2A4.9 4.9 0 0 0 7 10a5 5 0 0 0 6.8 4.6l-2-2A2.5 2.5 0 0 1 9.4 10.2l-2-2ZM12 4c5.5 0 9.2 4.1 10.7 6.2a3 3 0 0 1 0 3.6 17.5 17.5 0 0 1-2.2 2.6l-3.2-3.2A5 5 0 0 0 10.8 6.7L8.4 4.3A11.4 11.4 0 0 1 12 4Z"/>
+  </svg>
+`;
+
 module.exports = class HideSeenFriendRequests {
   // Initializes plugin state and runtime handles.
   constructor() {
@@ -284,7 +296,7 @@ module.exports = class HideSeenFriendRequests {
 
     button.setAttribute("aria-label", label);
     button.removeAttribute("title");
-    button.innerHTML = isSeen ? this.getEyeOffIcon() : this.getEyeIcon();
+    button.innerHTML = isSeen ? EYE_OFF_ICON : EYE_ICON;
 
     if (this.tooltip?.dataset?.sourceUserId === userId) {
       this.showTooltip(button);
@@ -369,21 +381,4 @@ module.exports = class HideSeenFriendRequests {
     this.tooltip = null;
   }
 
-  // Returns the SVG icon for marking a request as seen.
-  getEyeIcon() {
-    return `
-      <svg class="icon_f8fa06" aria-hidden="true" role="img" width="24" height="24" viewBox="0 0 24 24">
-        <path fill="currentColor" d="M12 4c5.5 0 9.2 4.1 10.7 6.2a3 3 0 0 1 0 3.6C21.2 15.9 17.5 20 12 20s-9.2-4.1-10.7-6.2a3 3 0 0 1 0-3.6C2.8 8.1 6.5 4 12 4Zm0 3a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm0 2.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Z"/>
-      </svg>
-    `;
-  }
-
-  // Returns the SVG icon for marking a request as unseen.
-  getEyeOffIcon() {
-    return `
-      <svg class="icon_f8fa06" aria-hidden="true" role="img" width="24" height="24" viewBox="0 0 24 24">
-        <path fill="currentColor" d="M2.3 2.3a1 1 0 0 1 1.4 0l18 18a1 1 0 0 1-1.4 1.4l-3.1-3.1A11.2 11.2 0 0 1 12 20c-5.5 0-9.2-4.1-10.7-6.2a3 3 0 0 1 0-3.6A18.4 18.4 0 0 1 5.1 6L2.3 3.7a1 1 0 0 1 0-1.4ZM7.3 8.2A4.9 4.9 0 0 0 7 10a5 5 0 0 0 6.8 4.6l-2-2A2.5 2.5 0 0 1 9.4 10.2l-2-2ZM12 4c5.5 0 9.2 4.1 10.7 6.2a3 3 0 0 1 0 3.6 17.5 17.5 0 0 1-2.2 2.6l-3.2-3.2A5 5 0 0 0 10.8 6.7L8.4 4.3A11.4 11.4 0 0 1 12 4Z"/>
-      </svg>
-    `;
-  }
 };
