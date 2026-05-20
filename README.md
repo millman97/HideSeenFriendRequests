@@ -8,7 +8,6 @@ A BetterDiscord plugin that lets you mark incoming pending friend requests as se
 - Click the eye button to mark a request as seen.
 - Seen pending requests are subtracted from Discord's pending friend request count.
 - Click the button again to mark the request as unseen.
-- Seen request IDs are saved locally through BetterDiscord data storage.
 
 ## Local Data
 
